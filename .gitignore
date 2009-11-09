@@ -1,0 +1,13 @@
+*.pyc
+*~
+bin/*
+parts/*
+develop-eggs/*
+src/nous.im.egg-info/*
+instance/*
+python/*
+eggs/*
+tags
+TAGS
+ID
+.installed.cfg
