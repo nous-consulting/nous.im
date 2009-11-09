@@ -22,5 +22,10 @@ setup(
     packages=find_packages('src'),
     include_package_data=True,
     zip_safe=True,
-    license="GPL"
+    license="GPL",
+    entry_points="""
+    [console_scripts]
+    chatty = nous.im:main
+    twistd = twisted.scripts.twistd:run
+    """,
 )
