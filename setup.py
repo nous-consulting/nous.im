@@ -16,16 +16,18 @@ setup(
     install_requires=[
         'mox',
         'zope.testing',
-        'twisted'
-    ],
+        'PasteDeploy',
+        'twisted',
+        'wokkel'
+        ],
     package_dir={'': 'src'},
     packages=find_packages('src'),
+    package_data={'twisted.plugins': ['twisted/plugins/im.py']},
     include_package_data=True,
-    zip_safe=True,
+    zip_safe=False,
     license="GPL",
     entry_points="""
     [console_scripts]
-    chatty = nous.im:main
     twistd = twisted.scripts.twistd:run
     """,
 )
