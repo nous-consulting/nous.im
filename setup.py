@@ -18,11 +18,10 @@ setup(
         'zope.testing',
         'PasteDeploy',
         'twisted',
-        'wokkel'
+        'twistedgadu'
         ],
     package_dir={'': 'src'},
     packages=find_packages('src'),
-    package_data={'twisted.plugins': ['twisted/plugins/im.py']},
     include_package_data=True,
     zip_safe=False,
     license="GPL",
