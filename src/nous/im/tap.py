@@ -6,10 +6,9 @@ from twisted.application import service, internet
 from twisted.web import server
 from twisted.python import usage
 
-from twistedgadu import GGClientFactory
-
 from nous.im.server import TwistedRPCServer
-from nous.im.gg import GaduTest
+from nous.im.gg import GaduEcho
+from nous.im.gg import GGClientFactory
 
 
 def getGGService(config):
@@ -19,7 +18,7 @@ def getGGService(config):
     if uin is None or pwd is None:
         return None, None
 
-    factory = GGClientFactory(GaduTest(uin, pwd))
+    factory = GGClientFactory(GaduEcho(uin, pwd))
     return internet.TCPClient('91.197.13.83', 8074, factory), factory
 
 

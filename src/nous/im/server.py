@@ -9,21 +9,18 @@ class TwistedRPCServer(xmlrpc.XMLRPC):
     """ A class which works as an XML-RPC server with
     HTTP basic authentication """
 
-    def __init__(self, user='', password='', ggclient=None):
-        self._user = user
+    def __init__(self, username='', password='', ggclient=None):
+        self._username = username
         self._password = password
-        self._auth = (self._user !='')
+        self._auth = (self._username !='')
         self.ggclient = ggclient
         xmlrpc.XMLRPC.__init__(self)
 
-    def xmlrpc_echo(self, x):
-        return x
-
-    def xmlrpc_ping(self):
-        return 'OK'
-
     def xmlrpc_send_gg_msg(self, to, msg):
-        self.ggclient.instance.send_msg(to, msg)
+        if not self.ggclient.clients:
+            return "FAIL"
+        for client in self.ggclient.clients:
+            client.send_msg(to, msg)
         return "OK"
 
     def render(self, request):
@@ -31,15 +28,15 @@ class TwistedRPCServer(xmlrpc.XMLRPC):
         HTTP basic authorization """
 
         if self._auth:
-            cleartext_token = self._user + ':' + self._password
-            user = request.getUser()
+            cleartext_token = self._username + ':' + self._password
+            username = request.getUser()
             passwd = request.getPassword()
 
-            if user=='' and passwd=='':
+            if username=='' and passwd=='':
                 request.setResponseCode(http.UNAUTHORIZED)
                 return 'Authorization required!'
             else:
-                token = user + ':' + passwd
+                token = username + ':' + passwd
                 if token != cleartext_token:
                     request.setResponseCode(http.UNAUTHORIZED)
                     return 'Authorization Failed!'
