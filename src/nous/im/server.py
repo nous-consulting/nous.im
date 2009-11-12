@@ -17,7 +17,9 @@ class TwistedRPCServer(xmlrpc.XMLRPC):
         xmlrpc.XMLRPC.__init__(self)
 
     def xmlrpc_send_gg_msg(self, to, msg):
-        if not self.ggclient.clients:
+        if not self.ggclient:
+            return "FAIL"
+        elif not self.ggclient.clients:
             return "FAIL"
         for client in self.ggclient.clients:
             client.send_msg(to, msg)
