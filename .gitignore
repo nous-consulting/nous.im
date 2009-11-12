@@ -11,3 +11,6 @@ tags
 TAGS
 ID
 .installed.cfg
+dist/*
+src/twisted/plugins/dropin.cache
+
