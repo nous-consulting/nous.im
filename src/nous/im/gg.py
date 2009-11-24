@@ -74,7 +74,7 @@ class GaduEcho(GaduConnectionManagerBase):
         print 'Downloaded contact info.'
 
     def on_msg_recv(self, conn, sender, seq, time, msg_class, message):
-        print "Got a message:\nSender: %s\nSeq: %s\n Time: %s\n Class: %s\n Msg: %s\n" % (sender, seq, time, msg_class, message)
+        print "Got a message:\nSender: %s\nSeq: %s\n Time: %s\n Class: %s\n Msg: %r\n" % (sender, seq, time, msg_class, message)
         conn.send_msg(sender, message)
 
     def on_msg_ack(self, conn, status, recipient, seq):
