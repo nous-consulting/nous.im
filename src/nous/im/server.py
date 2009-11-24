@@ -22,7 +22,7 @@ class TwistedRPCServer(xmlrpc.XMLRPC):
         elif not self.ggclient.clients:
             return "FAIL"
         for client in self.ggclient.clients:
-            client.send_msg(to, msg)
+            client.send_msg(to, msg.encode('ISO-8859-2', 'replace'))
         return "OK"
 
     def render(self, request):
